@@ -1,4 +1,5 @@
 package life;
+import java.io.IOException;
 import java.util.Arrays;
 
 import static life.Universe.printUniverse;
@@ -6,23 +7,60 @@ import static life.Universe.printUniverse;
 public class Generation {
     private static int[][] universe = Universe.getUniverse();
     private static int size = Universe.getUniverse_size();
-    private static int M = Universe.getM();
-    public Generation(){
-        for(int i = 0; i < M; i++){
+    private static int M;
+    public Generation() throws InterruptedException {
+        M = 0;
+        while(true){
+            M++;
             Universe.setUniverse(evolution());
             universe = Universe.getUniverse();
-            System.out.println("New Generation:");
-            printUniverse();
+            GUIoutput();
+            //consoleOutput();
+            //System.out.println("New Generation:");
+            //printUniverse();
+            if(M == 20) break;
+            Thread.sleep(1000);
         }
 
     }
+    private void GUIoutput(){
+        GameOfLife.getGLabel().setText("Generation #" + M);
+        GameOfLife.getALabel().setText("Alive: " + countAlive());
+    }
+    private void consoleOutput(){
+        //clear console first
+        /*
+        try {
+            if (System.getProperty("os.name").contains("Windows"))
+                new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
+            else
+                Runtime.getRuntime().exec("clear");
+        }
+        catch (IOException | InterruptedException ignored) {}*/
+        //print out the statistics
+        System.out.println("Generation #" + M);
+        System.out.println("Alive: " + countAlive());
+        printUniverse();
+    }
+    public int countAlive(){
+        int alive = 0;
+        for(int i = 0; i < size; i++){
+            for(int j = 0; j < size; j++){
+                if(universe[i][j] == 0){
+                    alive++;
+                }
+            }
+        }
+        return alive;
+    }
+
     private int[][] evolution(){
         int[][] newUniverse = new int[size][size];
         for(int i = 0; i < size; i++){
             for(int j = 0; j < size; j++){
                 int[] cell = new int[]{i, j};
                 int neighboursAlive = cellDetector(cell);
-                System.out.println("for cell: "+ Arrays.toString(cell)+" "+ neighboursAlive); //test with 3 36 err here
+                //System.out.println("for cell: "+ Arrays.toString(cell)+" "+ neighboursAlive); //test with 3 36 err here
                 if(cellCondition(neighboursAlive, cell)){
                     newUniverse[i][j] = 0;//alive
                 }else{
@@ -140,7 +178,7 @@ public class Generation {
             if(universe[0][0] == 0) neighboursAlive++;//S
             if(universe[0][1] == 0) neighboursAlive++;//SE
             if(universe[size-2][size-1] == 0) neighboursAlive++;//NW
-            if(universe[0][size-1] == 0) neighboursAlive++;//W
+            if(universe[size-1][size-1] == 0) neighboursAlive++;//W
 
         }else if(i == size - 1 && j == size - 1){
             //bottom right corner

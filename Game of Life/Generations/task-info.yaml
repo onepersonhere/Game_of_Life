@@ -195,12 +195,8 @@ files:
   visible: true
   learner_created: true
 feedback_link: https://hyperskill.org/projects/54/stages/295/implement#comment
-status: Failed
+status: Solved
 feedback:
-  message: "Wrong answer in test #2\n\nYour output is wrong!\n\nPlease find below\
-    \ the output of your program during this failed test.\nNote that the &#39;&gt;&#39;\
-    \ character indicates the beginning of the input line.\n\n---\n\nPlease input\
-    \ universe parameters:\n&gt; 8 1 10\n     OO \n  O  OO \n        \n   O O  \n\
-    O  O    \n  O OO  \n  O   O \n      O"
-  time: Tue, 22 Jun 2021 11:35:03 UTC
-record: -1
+  message: Congratulations!
+  time: Wed, 23 Jun 2021 00:28:56 UTC
+record: 2
