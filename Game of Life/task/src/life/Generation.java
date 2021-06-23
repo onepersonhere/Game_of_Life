@@ -1,6 +1,4 @@
 package life;
-import java.io.IOException;
-import java.util.Arrays;
 
 import static life.Universe.printUniverse;
 
@@ -8,24 +6,9 @@ public class Generation {
     private static int[][] universe = Universe.getUniverse();
     private static int size = Universe.getUniverse_size();
     private static int M;
-    public Generation() throws InterruptedException {
-        M = 0;
-        while(true){
-            M++;
-            Universe.setUniverse(evolution());
-            universe = Universe.getUniverse();
-            GUIoutput();
-            //consoleOutput();
-            //System.out.println("New Generation:");
-            //printUniverse();
-            if(M == 20) break;
-            Thread.sleep(1000);
-        }
-
-    }
-    private void GUIoutput(){
-        GameOfLife.getGLabel().setText("Generation #" + M);
-        GameOfLife.getALabel().setText("Alive: " + countAlive());
+    public Generation(){
+        Universe.setUniverse(evolution());
+        universe = Universe.getUniverse();
     }
     private void consoleOutput(){
         //clear console first
@@ -42,7 +25,7 @@ public class Generation {
         System.out.println("Alive: " + countAlive());
         printUniverse();
     }
-    public int countAlive(){
+    public static int countAlive(){
         int alive = 0;
         for(int i = 0; i < size; i++){
             for(int j = 0; j < size; j++){

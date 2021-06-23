@@ -356,9 +356,9 @@ files:
 - name: src/life/GamePanel.java
   visible: true
   learner_created: true
-- name: src/life/grid.java
-  visible: true
-  learner_created: true
 feedback_link: https://hyperskill.org/projects/54/stages/298/implement#comment
-status: Unchecked
-record: -1
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Wed, 23 Jun 2021 05:04:24 UTC
+record: 4

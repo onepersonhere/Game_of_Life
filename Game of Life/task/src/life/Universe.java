@@ -10,14 +10,9 @@ public class Universe {
     private static long seed;
     private static int M;
 
-    public Universe() throws InterruptedException {
+    public Universe(){
         setup();
         populateUniverse();
-        new GameOfLife();
-        //System.out.println("Original Generation:");
-        //printUniverse();
-        new Generation();
-        //printUniverse();
     }
 
     private static void setup(){

@@ -1,11 +1,10 @@
 package life;
 
-import java.util.Arrays;
-import java.util.Random;
-import java.util.Scanner;
+import javax.swing.*;
 
 public class Main {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args){
         new Universe();
+        SwingUtilities.invokeLater(GameOfLife::new);
     }
 }
