@@ -5,25 +5,10 @@ import static life.Universe.printUniverse;
 public class Generation {
     private static int[][] universe = Universe.getUniverse();
     private static int size = Universe.getUniverse_size();
-    private static int M;
+
     public Generation(){
         Universe.setUniverse(evolution());
         universe = Universe.getUniverse();
-    }
-    private void consoleOutput(){
-        //clear console first
-        /*
-        try {
-            if (System.getProperty("os.name").contains("Windows"))
-                new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
-            else
-                Runtime.getRuntime().exec("clear");
-        }
-        catch (IOException | InterruptedException ignored) {}*/
-        //print out the statistics
-        System.out.println("Generation #" + M);
-        System.out.println("Alive: " + countAlive());
-        printUniverse();
     }
 
     public static void setUniverse(int[][] universe) {

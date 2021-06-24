@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Universe {
     private static int[][] universe;
     private static int[][] originalUniverse;
-    private static int universe_size = 20;
+    private static int universe_size;
     private static long seed;
     private static int M;
 
@@ -20,7 +20,7 @@ public class Universe {
     private static void setup(){
         //System.out.println("Please input universe parameters:");
         Scanner scanner = new Scanner(System.in);
-        universe_size = 20; //scanner.nextInt();
+        universe_size = 100; //scanner.nextInt();
         //seed = scanner.nextLong();
         //M = scanner.nextInt(); //num of gens
         universe = new int[universe_size][universe_size];

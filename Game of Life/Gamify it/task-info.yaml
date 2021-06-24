@@ -505,8 +505,9 @@ files:
     }
   learner_created: true
 feedback_link: https://hyperskill.org/projects/54/stages/299/implement#comment
-status: Failed
+status: Solved
 feedback:
-  message: Incorrect
-  time: Thu, 24 Jun 2021 00:49:16 UTC
+  message: Well done! You finished the project. Select a new project on <a href="https://hyperskill.org/projects">JetBrains
+    Academy</a> to continue learning.
+  time: Thu, 24 Jun 2021 00:56:20 UTC
 record: 5
