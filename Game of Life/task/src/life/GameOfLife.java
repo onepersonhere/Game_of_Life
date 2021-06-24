@@ -17,16 +17,18 @@ public class GameOfLife extends JFrame {
     private static JButton ResetButton = new JButton("Reset");
     private static JButton NewButton = new JButton("New");
     private static JSlider slider = new JSlider();
+    private static JTextField textArea = new JTextField("Set Size Here");
+    private static int size = 500;
     Timer timer = null;
     int UPDATE_SPEED = 300;
     private static int clicks = 0;
     private static int M = 0;
 
     public GameOfLife() {
-        new Universe();
+        new Universe(size); //default size = 500
         setTitle("Game of Life");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(650, 596);
+        setSize(1150, 1200);
         setLayout(new BorderLayout());
         setLocationRelativeTo(null);
         initComponents();
@@ -40,11 +42,13 @@ public class GameOfLife extends JFrame {
         GenerationLabel();
         AliveLabel();
         Slider();
+        textArea();
         ButtonPanel.add(NewButton, BorderLayout.NORTH);
         ButtonPanel.add(PlayButton, BorderLayout.CENTER);
         ButtonPanel.add(ResetButton, BorderLayout.SOUTH);
         LabelPanel.add(GLabel, BorderLayout.NORTH);
-        LabelPanel.add(ALabel, BorderLayout.SOUTH);
+        LabelPanel.add(ALabel, BorderLayout.CENTER);
+        LabelPanel.add(textArea, BorderLayout.SOUTH);
 
         countersPanel.add(LabelPanel);
         countersPanel.add(ButtonPanel);
@@ -54,8 +58,10 @@ public class GameOfLife extends JFrame {
         add(countersPanel, BorderLayout.WEST);
         GamePanel();
     }
+    private void textArea(){
+        textArea.setPreferredSize(new Dimension(50, 40));
+    }
     private void GamePanel(){
-
         Panel = new GamePanel();
         add(Panel, BorderLayout.CENTER);
 
@@ -123,9 +129,14 @@ public class GameOfLife extends JFrame {
         NewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                new Universe();
+                try{size = Integer.parseInt(textArea.getText());}
+                catch(NumberFormatException ignored){}
+                new Universe(size);
                 GamePanel.setUniverse(Universe.getOriginalUniverse());
+                GamePanel.setSize(size);
                 Generation.setUniverse(Universe.getOriginalUniverse());
+                Generation.setSize(size);
+
                 GLabel.setText("Generation #0");
                 ALabel.setText("Alive: " + Generation.countAlive());
                 repaint();

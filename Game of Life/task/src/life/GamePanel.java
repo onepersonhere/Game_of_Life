@@ -6,8 +6,10 @@ import java.awt.*;
 public class GamePanel extends JPanel {
     private static int size = Universe.getUniverse_size();
     private static int[][] universe = Universe.getUniverse();
+    int w = 1000;
+    int h = 1000;
     public GamePanel(){
-        setBounds(0, 40, 500, 500);
+        setBounds(0, 40, w, h);
         setBackground(Color.white);
     }
 
@@ -16,13 +18,16 @@ public class GamePanel extends JPanel {
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D) g;
         //500w && 500h
-        int WIDTH = 500/size;
-        int HEIGHT = 500/size;
-        for ( int x = 0; x <= 500; x += WIDTH ) {
-            for (int y = 0; y <= 500; y += HEIGHT) {
+        int WIDTH = w/size;
+        int HEIGHT = h/size;
+        //generate grid
+        /*
+        for ( int x = 0; x <= w; x += WIDTH ) {
+            for (int y = 0; y <= h; y += HEIGHT) {
                 g2D.drawRect(x, y, WIDTH, HEIGHT);
             }
-        }
+        }*/
+        //generate boxes
         for(int i = 0; i < size; i++){
             for(int j = 0; j < size; j++){
                 if(universe[i][j] == 0){
@@ -31,6 +36,10 @@ public class GamePanel extends JPanel {
                 }
             }
         }
+    }
+
+    public static void setSize(int size) {
+        GamePanel.size = size;
     }
 
     public static void setUniverse(int[][] universe) {

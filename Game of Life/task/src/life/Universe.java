@@ -11,7 +11,9 @@ public class Universe {
     private static long seed;
     private static int M;
 
-    public Universe(){
+    public Universe(int size){
+        universe_size = size;
+        System.out.println(universe_size);
         setup();
         populateUniverse();
         originalUniverse = universe;
@@ -20,7 +22,7 @@ public class Universe {
     private static void setup(){
         //System.out.println("Please input universe parameters:");
         Scanner scanner = new Scanner(System.in);
-        universe_size = 100; //scanner.nextInt();
+        //universe_size = 100; //scanner.nextInt();
         //seed = scanner.nextLong();
         //M = scanner.nextInt(); //num of gens
         universe = new int[universe_size][universe_size];

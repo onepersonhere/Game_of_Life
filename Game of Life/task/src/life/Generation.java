@@ -15,6 +15,10 @@ public class Generation {
         Generation.universe = universe;
     }
 
+    public static void setSize(int size) {
+        Generation.size = size;
+    }
+
     public static int countAlive(){
         int alive = 0;
         for(int i = 0; i < size; i++){
