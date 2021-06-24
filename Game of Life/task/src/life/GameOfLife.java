@@ -3,6 +3,7 @@ package life;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
@@ -10,6 +11,10 @@ public class GameOfLife extends JFrame {
     private static JLabel GLabel = new JLabel();
     private static JLabel ALabel = new JLabel();
     private static JPanel Panel = new JPanel();
+    private static JToggleButton PlayButton = new JToggleButton("Play/Pause");
+    private static JButton ResetButton = new JButton("Reset");
+    Timer timer = null;
+    private static int clicks = 0;
     private static int M = 0;
 
     public GameOfLife() {
@@ -23,10 +28,17 @@ public class GameOfLife extends JFrame {
     }
     private void initComponents(){
         JPanel countersPanel = new JPanel(new BorderLayout());
+        JPanel LabelPanel = new JPanel(new BorderLayout());
+        JPanel ButtonPanel = new JPanel(new BorderLayout(5,2));
+        Buttons();
         GenerationLabel();
         AliveLabel();
-        countersPanel.add(GLabel, BorderLayout.NORTH);
-        countersPanel.add(ALabel, BorderLayout.SOUTH);
+        ButtonPanel.add(PlayButton, BorderLayout.WEST);
+        ButtonPanel.add(ResetButton, BorderLayout.EAST);
+        LabelPanel.add(GLabel, BorderLayout.NORTH);
+        LabelPanel.add(ALabel, BorderLayout.SOUTH);
+        countersPanel.add(LabelPanel, BorderLayout.WEST);
+        countersPanel.add(ButtonPanel, BorderLayout.EAST);
         add(countersPanel, BorderLayout.NORTH);
         GamePanel();
     }
@@ -34,8 +46,10 @@ public class GameOfLife extends JFrame {
 
         Panel = new GamePanel();
         add(Panel, BorderLayout.CENTER);
-        Timer timer = null;
-        Timer finalTimer = timer;
+
+    }
+    private void Buttons(){
+        int UPDATE_SPEED = 300;
         ActionListener refresh = e -> {
             new Generation();
             M++;
@@ -44,17 +58,39 @@ public class GameOfLife extends JFrame {
             GamePanel.setUniverse(Universe.getUniverse());
             repaint();
             setVisible(true);
-            if(M == 20){
-                assert false;
-                finalTimer.setRepeats(false);
-            }
         };
-        int UPDATE_SPEED = 300;
-        timer = new Timer(UPDATE_SPEED, refresh);
-        timer.start();
-        
-    }
 
+        PlayButton.setName("PlayToggleButton");
+        PlayButton.setFocusPainted(false);
+        ResetButton.setName("ResetButton");
+        ResetButton.setFocusPainted(false);
+
+        PlayButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if(clicks % 2 == 0) {
+                    timer = new Timer(UPDATE_SPEED, refresh);
+                    timer.start();
+                }else{
+                    timer.stop();
+                }
+                clicks++;
+            }
+        });
+
+        ResetButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                GamePanel.setUniverse(Universe.getOriginalUniverse());
+                Generation.setUniverse(Universe.getOriginalUniverse());
+                GLabel.setText("Generation #0");
+                ALabel.setText("Alive: " + Generation.countAlive());
+                repaint();
+                M = 0;
+            }
+        });
+
+    }
     private void GenerationLabel(){
         GLabel.setName("GenerationLabel");
         GLabel.setText("Generation #0");

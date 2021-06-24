@@ -25,6 +25,11 @@ public class Generation {
         System.out.println("Alive: " + countAlive());
         printUniverse();
     }
+
+    public static void setUniverse(int[][] universe) {
+        Generation.universe = universe;
+    }
+
     public static int countAlive(){
         int alive = 0;
         for(int i = 0; i < size; i++){

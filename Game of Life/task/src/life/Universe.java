@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class Universe {
     private static int[][] universe;
+    private static int[][] originalUniverse;
     private static int universe_size = 20;
     private static long seed;
     private static int M;
@@ -13,6 +14,7 @@ public class Universe {
     public Universe(){
         setup();
         populateUniverse();
+        originalUniverse = universe;
     }
 
     private static void setup(){
@@ -63,5 +65,9 @@ public class Universe {
 
     public static void setUniverse(int[][] universe) {
         Universe.universe = universe;
+    }
+
+    public static int[][] getOriginalUniverse() {
+        return originalUniverse;
     }
 }
